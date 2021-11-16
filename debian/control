@@ -1,0 +1,29 @@
+Source: accomplishments-viewer
+Section: utils
+Priority: optional
+Maintainer: Dani Llewellyn <diddledani@ubuntu.com>
+Build-Depends: debhelper-compat (= 13),
+ unzip,
+ cmake,
+ llvm-dev,
+ xz-utils,
+ zip
+Standards-Version: 4.5.1
+Homepage: https://github.com/UbuntuAccomplishments
+Vcs-Browser: https://github.com/UbuntuAccomplishments/viewer
+Vcs-Git: https://github.com/UbuntuAccomplishments/viewer.git
+Rules-Requires-Root: no
+
+Package: accomplishments-viewer
+Architecture: any
+Depends: ${shlibs:Depends},
+ ${misc:Depends},
+ accomplishments-daemon
+Recommends: ubuntu-community-accomplishments,
+ ubuntu-desktop-accomplishments
+Description: Ubuntu Accomplishments opportunities and trophies viewer
+ The Ubuntu Accomplishments opportunities and trophies viewer provides a 
+ graphical interface for the Ubuntu Accomplishments system.  The Ubuntu
+ Accomplishments system provides a simple, cohesive way to browse different
+ opportunities in the Ubuntu community and beyond, find out how to participate
+ and accomplish them, and see different accomplishments in one place.
