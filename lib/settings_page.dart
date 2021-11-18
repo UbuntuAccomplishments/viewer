@@ -23,9 +23,12 @@ class SettingsPage extends StatelessWidget {
           child: ListView(
             children: [
               ListTile(
-                title: const Text('Check accomplishments'),
-                onTap: () => runScripts(),
-              ),
+                  title: const Text('Check accomplishments'),
+                  onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Checking for accomplishments.')));
+                    runScripts();
+                  }),
               ListTile(
                 title: const Text('Reload accomplishments collections...'),
                 onTap: () {
