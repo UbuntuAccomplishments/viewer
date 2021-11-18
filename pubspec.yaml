@@ -39,6 +39,7 @@ dependencies:
   url_launcher: ^6.0.12
   flutter_svg: ^0.23.0
   json_annotation: ^4.3.0
+  yaru: ^0.2.0
 
 dev_dependencies:
   flutter_test:
