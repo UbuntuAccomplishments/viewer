@@ -21,12 +21,26 @@ Future<List<String>> fetchOpportunities() async {
   return decodeAS(response);
 }
 
-void listenForTrophies(Function callback) async {
+Future<void> listenForTrophies(Function callback) async {
   final signals = DBusRemoteObjectSignalStream(
       object: object, interface: interface, name: 'trophy_received');
   await for (var signal in signals) {
     callback(signal.values.first.toNative());
   }
+}
+
+Future<void> listenForReload(Function callback) async {
+  final signals = DBusRemoteObjectSignalStream(
+      object: object,
+      interface: interface,
+      name: 'accoms_collections_reloaded');
+  await for (var _ in signals) {
+    callback();
+  }
+}
+
+void runScripts() {
+  object.callMethod(interface, 'run_scripts', []);
 }
 
 Future<Map<String, dynamic>> getTrophyData(String accomID) async {
@@ -57,6 +71,10 @@ Future<List<Accomplishment>> buildViewerDatabase() async {
   return decodeAASV(response)
       .map((item) => Accomplishment.fromJson(item))
       .toList();
+}
+
+Future<void> reloadAccomDatabase() async {
+  await object.callMethod(interface, 'reload_accom_database', []);
 }
 
 Future<List<Map<String, dynamic>>> getAllExtraInformation() async {

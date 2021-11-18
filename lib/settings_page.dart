@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'dbus.dart';
 import 'extrainfo_form.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -23,14 +24,14 @@ class SettingsPage extends StatelessWidget {
             children: [
               ListTile(
                 title: const Text('Check accomplishments'),
-                onTap: () {
-                  // TODO: receck accomplishments
-                },
+                onTap: () => runScripts(),
               ),
               ListTile(
                 title: const Text('Reload accomplishments collections...'),
                 onTap: () {
-                  // TODO: reload collections
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Reloading collections.')));
+                  reloadAccomDatabase();
                 },
               ),
               ListTile(

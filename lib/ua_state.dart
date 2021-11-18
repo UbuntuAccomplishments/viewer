@@ -23,6 +23,7 @@ class _UAStateManagerState extends State<UAStateManager> {
     super.initState();
     database = buildViewerDatabase();
     listenForTrophies((_) => refreshViewerDatabase());
+    listenForReload((_) => refreshViewerDatabase());
   }
 
   void refreshViewerDatabase() {
