@@ -95,3 +95,11 @@ Future<void> setExtraInformation(String item, String? data) async {
   await object.callMethod(interface, 'write_extra_information_file',
       [DBusString(item), DBusString(data ?? "")]);
 }
+
+Future<Map<String, Accomplishment>> listDependingOn(String item) async {
+  final response = await object.callMethod(
+      interface, 'list_depending_on', [DBusString(item)],
+      replySignature: DBusSignature('a{sv}'));
+  return decodeASV(response).map((key, value) =>
+      MapEntry(key, Accomplishment.fromJson(Map<String, dynamic>.from(value))));
+}

@@ -39,8 +39,9 @@ class TrophiesGrid extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            TrophyDetails(trophyId: trophies[index].id),
+                        builder: (context) => TrophyDetails(
+                            key: Key(trophies[index].id),
+                            trophyId: trophies[index].id),
                       ),
                     );
                   },
