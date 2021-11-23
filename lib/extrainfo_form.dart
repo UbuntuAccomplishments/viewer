@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'dbus.dart';
+import 'i18n_messages.dart';
 import 'utils.dart';
 
 class ExtraInfoForm extends StatefulWidget {
@@ -70,7 +71,7 @@ class _ExtraInfoFormState extends State<ExtraInfoForm> {
                                     if (!RegExp(
                                             data[collection]![index]['regex'])
                                         .hasMatch(value)) {
-                                      return 'Please enter a valid $infoDesc';
+                                      return getInvalidInputNamed(infoDesc);
                                     }
                                   }
                                 }
@@ -98,14 +99,14 @@ class _ExtraInfoFormState extends State<ExtraInfoForm> {
                         widget.onSaved!();
                       }
                     },
-                    child: const Text('Save'),
+                    child: Text(getSaveText()),
                   ),
                 ),
               ),
             ],
           );
         } else if (snapshot.hasError) {
-          return const Text("Error");
+          return Text(getErrorText(snapshot.error.toString()));
         }
         return const CircularProgressIndicator();
       },

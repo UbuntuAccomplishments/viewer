@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'i18n_messages.dart';
 import 'trophies_grid.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -50,14 +51,15 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              label: "My Trophies",
-              icon: Icon(
+              label: getMyTrophiesTitle(),
+              icon: const Icon(
                 Icons.emoji_events_outlined,
               )),
           BottomNavigationBarItem(
-              label: "Opportunities", icon: Icon(Icons.lightbulb)),
+              label: getOpportunitiesTitle(),
+              icon: const Icon(Icons.lightbulb)),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.deepPurple,

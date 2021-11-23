@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'dbus.dart';
 import 'extrainfo_form.dart';
+import 'i18n_messages.dart';
 
 class SettingsPage extends StatelessWidget {
   SettingsPage({Key? key, required this.title}) : super(key: key);
@@ -23,29 +24,34 @@ class SettingsPage extends StatelessWidget {
           child: ListView(
             children: [
               ListTile(
-                  title: const Text('Check accomplishments'),
-                  onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Checking for accomplishments.')));
+                title: ElevatedButton(
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(getCheckingAccomplishmentsMessage())));
                     runScripts();
-                  }),
+                  },
+                  child: Text(getCheckAccomplishmentsButton()),
+                ),
+              ),
               ListTile(
-                title: const Text('Reload accomplishments collections...'),
-                onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Reloading collections.')));
-                  reloadAccomDatabase();
-                },
+                title: ElevatedButton(
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(getReloadingAccomplishmentsMessage())));
+                    reloadAccomDatabase();
+                  },
+                  child: Text(getReloadAccomplishmentsButton()),
+                ),
               ),
               ListTile(
                 minVerticalPadding: 24.0,
-                title: const Text('Extra information...'),
+                title: Text(getExtraInformationText()),
                 subtitle: ExtraInfoForm(
                   onSaved: () {
                     if (_formKey.currentState?.validate() ?? false) {
                       _formKey.currentState!.save();
                       ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Settings saved.')));
+                          SnackBar(content: Text(getSettingsSavedMessage())));
                     }
                   },
                 ),

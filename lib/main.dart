@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yaru/yaru.dart';
 
+import 'i18n_messages.dart';
 import 'ua_state.dart';
 import 'home_page.dart';
 import 'settings_page.dart';
@@ -17,13 +18,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return UAStateManager(
       child: MaterialApp(
-        title: 'Ubuntu Accomplishments',
+        title: getAppTitle(),
         theme: yaruLight,
         darkTheme: yaruDark,
-        home: const MyHomePage(title: 'Ubuntu Accomplishments'),
+        home: MyHomePage(title: getAppTitle()),
         routes: <String, WidgetBuilder>{
           '/settings': (BuildContext context) =>
-              SettingsPage(title: 'Settings'),
+              SettingsPage(title: getSettingsTitle()),
         },
       ),
     );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'i18n_messages.dart';
+
 class IDPanel extends StatelessWidget {
   IDPanel({Key? key, this.onSavedIdentity}) : super(key: key);
 
@@ -15,12 +17,12 @@ class IDPanel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextFormField(
-            decoration: const InputDecoration(
-              hintText: 'Enter your launchpad.net username',
+            decoration: InputDecoration(
+              hintText: getLaunchpadUsernameFieldHint(),
             ),
             validator: (String? value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter your launchpad.net username';
+                return getLaunchpadUsernameFieldEmptyMessage();
               }
               return null;
             },
@@ -34,7 +36,7 @@ class IDPanel extends StatelessWidget {
                   onSavedIdentity!();
                 }
               },
-              child: const Text('Save'),
+              child: Text(getSaveText()),
             ),
           ),
         ],

@@ -7,19 +7,21 @@ import 'package:ubuntuaccomplishments/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'dbus.dart';
+import 'i18n_messages.dart';
 import 'models/accomplishment.dart';
 
 const htmlContent = r"""
 <p style="text-align: center"><img src="file://::image::"></p>
 <table>
-  <tr><th>Description:</th><td>::description::</td></tr>
-  <tr><th>About the trophy:</th><td>::summary::</td></tr>
-  <tr><th>Steps to complete for this trophy:</th><td>::steps::</td></tr>
-  <tr><th>Tips:</th><td>::tips::</td></tr>
-  <tr><th>Pitfalls:</th><td>::pitfalls::</td></tr>
-  <tr><th>Relevant links:</th><td>::links::</td></tr>
-  <tr><th>Further help can be found at:</th><td>::help::</td></tr>
-  <tr><td colspan="2">This trophy was contributed by ::author::</td></tr>
+  ::description::
+  ::summary::
+  ::depends::
+  ::steps::
+  ::tips::
+  ::pitfalls::
+  ::links::
+  ::help::
+  ::author::
 </table>
 """;
 
@@ -31,6 +33,11 @@ class TrophyDetails extends StatefulWidget {
   @override
   _TrophyDetailsState createState() => _TrophyDetailsState();
 }
+
+String asTableRow(String title, String text) =>
+    "<tr><th>$title</th><td>$text</td></tr>";
+
+String asHeadingRow(String text) => '<tr><th colspan="2">$text</th></tr>';
 
 class _TrophyDetailsState extends State<TrophyDetails> {
   late Future<Accomplishment> trophyDetails;
@@ -60,6 +67,7 @@ class _TrophyDetailsState extends State<TrophyDetails> {
             String tips = snapshot.data!.tips;
             String pitfalls = snapshot.data!.pitfalls;
             String author = snapshot.data!.author;
+            String depends = snapshot.data!.depends;
 
             steps = steps.convertToHtmlList(ordered: true);
             links = links.addUrlsAsHtmlAnchors();
@@ -74,20 +82,32 @@ class _TrophyDetailsState extends State<TrophyDetails> {
               appBar: AppBar(
                 // Here we take the value from the MyHomePage object that was created by
                 // the App.build method, and use it to set our appbar title.
-                title: Text("Trophy Details: $title"),
+                title: Text(getTrophyScreenTitle(title)),
               ),
               body: SingleChildScrollView(
                 child: Html(
                   data: htmlContent
-                      .replaceAll('::description::', description)
                       .replaceAll('::image::', image)
-                      .replaceAll('::summary::', summary)
-                      .replaceAll('::steps::', steps)
-                      .replaceAll('::links::', links)
-                      .replaceAll('::help::', help)
-                      .replaceAll('::tips::', tips)
-                      .replaceAll('::pitfalls::', pitfalls)
-                      .replaceAll('::author::', author),
+                      .replaceAll('::description::',
+                          asTableRow(getDescriptionTitle(), description))
+                      .replaceAll(
+                          '::summary::', asTableRow(getSummaryTitle(), summary))
+                      .replaceAll(
+                          '::depends::',
+                          depends.isNotEmpty
+                              ? asHeadingRow(getTrophyDependencies(depends))
+                              : '')
+                      .replaceAll(
+                          '::steps::', asTableRow(getStepsTitle(), steps))
+                      .replaceAll('::tips::', asTableRow(getTipsTitle(), tips))
+                      .replaceAll('::pitfalls::',
+                          asTableRow(getPitfallsTitle(), pitfalls))
+                      .replaceAll('::links::',
+                          asTableRow(getRelevantLinksTitle(), links))
+                      .replaceAll(
+                          '::help::', asTableRow(getFurtherHelpTitle(), help))
+                      .replaceAll(
+                          '::author::', asHeadingRow(getTrophyAuthor(author))),
                   style: {
                     'tr': Style(
                       padding: const EdgeInsets.all(10.0),
@@ -101,8 +121,8 @@ class _TrophyDetailsState extends State<TrophyDetails> {
                       if (await canLaunch(url)) {
                         await launch(url);
                       } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Could not launch $url')));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(getCannotLaunchUrlText(url))));
                       }
                     }
                   },
@@ -146,7 +166,7 @@ class _TrophyDetailsState extends State<TrophyDetails> {
               ),
             );
           } else if (snapshot.hasError) {
-            return Text("Error... ${snapshot.error}");
+            return Text(getErrorText(snapshot.error.toString()));
           }
           return const CircularProgressIndicator();
         });

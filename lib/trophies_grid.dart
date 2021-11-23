@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'i18n_messages.dart';
 import 'models/accomplishment.dart';
 import 'trophy_details.dart';
 import 'ua_state.dart';
@@ -49,7 +50,7 @@ class TrophiesGrid extends StatelessWidget {
                 ),
               );
             } else if (snapshot.hasError) {
-              return Text("Error ${snapshot.error}");
+              return Text(getErrorText(snapshot.error.toString()));
             }
             return const CircularProgressIndicator();
           }),
