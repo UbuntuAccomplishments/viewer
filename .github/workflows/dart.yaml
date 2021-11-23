@@ -12,6 +12,7 @@ jobs:
 
     container:
       image:  fischerscode/flutter:latest
+      options: --user root
 
     steps:
       - uses: actions/checkout@v2
