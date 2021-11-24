@@ -27,11 +27,11 @@ class TrophiesGrid extends StatelessWidget {
                 primary: false,
                 padding: const EdgeInsets.all(20),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisSpacing: 48,
-                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
                   crossAxisCount:
-                      (MediaQuery.of(context).size.width / 256).ceil(),
-                  childAspectRatio: 0.6,
+                      (MediaQuery.of(context).size.width / 152).ceil(),
+                  childAspectRatio: 0.8,
                 ),
                 itemCount: trophies.length,
                 itemBuilder: (context, index) => GestureDetector(

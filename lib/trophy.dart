@@ -49,11 +49,9 @@ class Trophy extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Expanded(
-          flex: 3,
           child: imageWidget,
         ),
         Expanded(
-          flex: 1,
           child: Container(
             padding: const EdgeInsets.only(top: 8),
             alignment: Alignment.topCenter,
