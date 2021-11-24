@@ -155,7 +155,8 @@ class _TrophyDetailsState extends State<TrophyDetails> {
                               TextSpan(
                                 text: dependencies![element]!.title,
                                 style: const TextStyle(
-                                    decoration: TextDecoration.underline),
+                                    decoration: TextDecoration.underline,
+                                    color: Colors.blue),
                                 mouseCursor: SystemMouseCursors.click,
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () => Navigator.push(
