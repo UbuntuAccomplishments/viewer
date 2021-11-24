@@ -58,12 +58,41 @@ class _TrophyDetailsState extends State<TrophyDetails> {
     }();
   }
 
+  Widget withLockAndOpacity(Widget imageWidget) {
+    if (!trophyDetails!.accomplished) {
+      imageWidget = Opacity(
+        opacity: 0.2,
+        child: imageWidget,
+      );
+    }
+
+    if (trophyDetails!.locked) {
+      imageWidget = Stack(
+        alignment: Alignment.center,
+        children: [
+          imageWidget,
+          Align(
+            alignment: Alignment.bottomRight,
+            child: SvgPicture.asset('data/media/lock.svg'),
+          ),
+        ],
+      );
+    }
+
+    return SizedBox(
+      width: 176,
+      height: 257,
+      child: imageWidget,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     if (dependencies == null || trophyDetails == null) {
       return const CircularProgressIndicator();
     }
 
+    final bool locked = trophyDetails!.locked;
     final bool accomplished = trophyDetails!.accomplished;
     final String title = trophyDetails!.title;
     final String description = trophyDetails!.description;
@@ -163,39 +192,16 @@ class _TrophyDetailsState extends State<TrophyDetails> {
           },
           customImageRenders: {
             networkSourceMatcher(extension: 'svg', schemas: ['file']):
-                (context, attributes, element) {
-              Widget imageWidget = SvgPicture.file(
-                File(attributes['src']?.substring(7) ?? 'about:blank'),
-                fit: BoxFit.contain,
-              );
-
-              if (!accomplished) {
-                imageWidget = Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Opacity(
-                      opacity: 0.2,
-                      child: imageWidget,
-                    ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: SvgPicture.asset('data/media/lock.svg'),
-                    ),
-                  ],
-                );
-              }
-
-              return SizedBox(
-                width: 176,
-                height: 257,
-                child: imageWidget,
-              );
-            },
+                (context, attributes, element) =>
+                    withLockAndOpacity(SvgPicture.file(
+                      File(attributes['src']?.substring(7) ?? 'about:blank'),
+                      fit: BoxFit.contain,
+                    )),
             networkSourceMatcher(schemas: ['file']):
-                (context, attributes, element) {
-              return Image.file(
-                  File(attributes['src']?.substring(7) ?? 'about:blank'));
-            },
+                (context, attributes, element) => withLockAndOpacity(Image.file(
+                      File(attributes['src']?.substring(7) ?? 'about:blank'),
+                      fit: BoxFit.contain,
+                    )),
           },
           tagsList: Html.tags..add('depends'),
         ),
