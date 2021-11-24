@@ -92,8 +92,6 @@ class _TrophyDetailsState extends State<TrophyDetails> {
       return const CircularProgressIndicator();
     }
 
-    final bool locked = trophyDetails!.locked;
-    final bool accomplished = trophyDetails!.accomplished;
     final String title = trophyDetails!.title;
     final String description = trophyDetails!.description;
     final String image = trophyDetails!.iconPath;
