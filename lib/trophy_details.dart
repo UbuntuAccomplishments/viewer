@@ -152,27 +152,26 @@ class _TrophyDetailsState extends State<TrophyDetails> {
                 return TextSpan(
                     children: dependencies!.keys
                         .map((k) => TextSpan(
-                                children: [
-                              TextSpan(
-                                text: dependencies![k]!.title,
-                                style: const TextStyle(
-                                    decoration: TextDecoration.underline),
-                                mouseCursor: SystemMouseCursors.click,
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () => Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => TrophyDetails(
-                                            key: Key(k),
-                                            trophyId: k,
-                                          ),
+                              text: dependencies![k]!.title,
+                              style: const TextStyle(
+                                  decoration: TextDecoration.underline),
+                              mouseCursor: SystemMouseCursors.click,
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => TrophyDetails(
+                                          key: Key(k),
+                                          trophyId: k,
                                         ),
                                       ),
-                              ),
-                              const TextSpan(text: ', '),
-                            ]..removeLast()))
+                                    ),
+                            ))
+                        .expand(
+                            (element) => [element, const TextSpan(text: ', ')])
                         .toList()
-                        .cast<InlineSpan>());
+                        .cast<InlineSpan>()
+                      ..removeLast());
               } else {
                 return const TextSpan();
               }
