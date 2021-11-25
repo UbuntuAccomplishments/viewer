@@ -21,7 +21,7 @@ class TrophiesGrid extends StatelessWidget {
               AsyncSnapshot<List<Accomplishment>> snapshot) {
             if (snapshot.hasData) {
               final trophies = snapshot.data!
-                  .where((trophy) => trophy.accomplished || showOpportunities)
+                  .where((trophy) => trophy.accomplished != showOpportunities)
                   .toList();
               return GridView.builder(
                 primary: false,
