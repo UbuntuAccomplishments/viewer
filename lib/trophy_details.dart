@@ -151,6 +151,8 @@ class _TrophyDetailsState extends State<TrophyDetails> {
               if (dependencies!.isNotEmpty) {
                 return TextSpan(
                     children: dependencies!.keys
+                        .where((key) =>
+                            !(dependencies![key]?.accomplished ?? false))
                         .expand((element) => [
                               TextSpan(
                                 text: dependencies![element]!.title,
