@@ -62,7 +62,6 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: const Icon(Icons.lightbulb)),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.deepPurple,
         onTap: _onItemTapped,
       ),
       floatingActionButton: FloatingActionButton(
