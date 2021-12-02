@@ -15,7 +15,6 @@
      </linearGradient>
      <linearGradient xlink:href="#a" id="b" x1="-344.153" x2="-395.849" y1="274.711" y2="425.4" gradientTransform="matrix(-.59146 0 0 .59146 154.896 149.463)" gradientUnits="userSpaceOnUse"/>
    </defs>
-   <text xml:space="preserve" x="209.126" y="719.007" fill="#ffc022" font-family="sans-serif" letter-spacing="0" opacity=".376" transform="matrix(1.12096 0 0 .8921 -325.808 -332.81)" word-spacing="0"><tspan x="209.126" y="719.007" font-size="9.52"> </tspan></text>
    <g transform="translate(-325.808 -332.344)">
      <rect width="131.242" height="130.174" x="-457.05" y="332.806" fill="#f15d22" fill-rule="evenodd" rx="35.488" ry="35.488" transform="scale(-1 1)"/>
      <path fill="url(#b)" fill-rule="evenodd" d="M422.375 338.371h-61.893a29.508 29.508 0 0 0-29.573 29.573v59.898c.53 12.789 2.57 4.704 6.453-9.459 4.513-16.46 19.209-30.845 37.106-41.627 13.661-8.23 28.951-13.484 56.784-13.984 15.785-.283 14.391-20.32-8.877-24.4z"/>
@@ -34,7 +33,6 @@
      <rect width="6.24" height="2.642" x="-393.831" y="460.348" fill="#fff" fill-rule="evenodd" rx="1.687" ry=".72" transform="scale(-1 1)"/>
      <g transform="translate(103.064 -120.939) scale(1.2066)">
        <ellipse cx="-99.753" cy="100.298" fill="#f15d22" rx="17.425" ry="14.647" transform="matrix(1 0 0 1.0431 338.94 324.067)"/>
-       <text xml:space="preserve" x="218.051" y="478.539" fill="#fff" font-family="sans-serif" letter-spacing="0" word-spacing="0"><tspan x="218.051" y="478.539" font-size="87.549"></tspan></text>
      </g>
    </g>
 </svg>
