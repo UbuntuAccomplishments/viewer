@@ -32,7 +32,7 @@ class TrophyDetails extends StatefulWidget {
   final String trophyId;
 
   @override
-  _TrophyDetailsState createState() => _TrophyDetailsState();
+  TrophyDetailsState createState() => TrophyDetailsState();
 }
 
 String asTableRow(String title, String text) =>
@@ -40,7 +40,7 @@ String asTableRow(String title, String text) =>
 
 String asHeadingRow(String text) => '<tr><th colspan="2">$text</th></tr>';
 
-class _TrophyDetailsState extends State<TrophyDetails> {
+class TrophyDetailsState extends State<TrophyDetails> {
   Accomplishment? trophyDetails;
   Map<String, Accomplishment>? dependencies;
 
@@ -146,8 +146,9 @@ class _TrophyDetailsState extends State<TrophyDetails> {
               alignment: Alignment.topLeft,
             ),
           },
-          customRender: {
-            'depends': (RenderContext renderContext, Widget child) {
+          customRenders: {
+            tagMatcher("depends"):
+                CustomRender.inlineSpan(inlineSpan: (renderContext, children) {
               if (dependencies!.isNotEmpty) {
                 return TextSpan(
                     children: dependencies!.keys
@@ -179,30 +180,34 @@ class _TrophyDetailsState extends State<TrophyDetails> {
               } else {
                 return const TextSpan();
               }
-            },
+            }),
+            networkSourceMatcher(extension: 'svg', schemas: ['file']):
+                CustomRender.widget(
+                    widget: (context, children) =>
+                        withLockAndOpacity(SvgPicture.file(
+                          File(context.tree.element?.attributes["src"]
+                                  ?.substring(7) ??
+                              'about:blank'),
+                          fit: BoxFit.contain,
+                        ))),
+            networkSourceMatcher(schemas: ['file']): CustomRender.widget(
+                widget: (context, children) => withLockAndOpacity(Image.file(
+                      File(context.tree.element?.attributes["src"]
+                              ?.substring(7) ??
+                          'about:blank'),
+                      fit: BoxFit.contain,
+                    ))),
           },
           onLinkTap: (String? url, _, __, ___) async {
             if (url != null) {
-              if (await canLaunch(url)) {
-                await launch(url);
+              var targetUrl = Uri.parse(url);
+              if (await canLaunchUrl(targetUrl)) {
+                await launchUrl(targetUrl);
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text(getCannotLaunchUrlText(url))));
               }
             }
-          },
-          customImageRenders: {
-            networkSourceMatcher(extension: 'svg', schemas: ['file']):
-                (context, attributes, element) =>
-                    withLockAndOpacity(SvgPicture.file(
-                      File(attributes['src']?.substring(7) ?? 'about:blank'),
-                      fit: BoxFit.contain,
-                    )),
-            networkSourceMatcher(schemas: ['file']):
-                (context, attributes, element) => withLockAndOpacity(Image.file(
-                      File(attributes['src']?.substring(7) ?? 'about:blank'),
-                      fit: BoxFit.contain,
-                    )),
           },
           tagsList: Html.tags..add('depends'),
         ),
