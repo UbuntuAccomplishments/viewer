@@ -10,10 +10,10 @@ class ExtraInfoForm extends StatefulWidget {
   final Function? onSaved;
 
   @override
-  _ExtraInfoFormState createState() => _ExtraInfoFormState();
+  ExtraInfoFormState createState() => ExtraInfoFormState();
 }
 
-class _ExtraInfoFormState extends State<ExtraInfoForm> {
+class ExtraInfoFormState extends State<ExtraInfoForm> {
   late Future<List<Map<String, dynamic>>> extraInfo;
 
   @override

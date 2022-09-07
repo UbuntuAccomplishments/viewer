@@ -12,10 +12,10 @@ class UAStateManager extends StatefulWidget {
   final Widget child;
 
   @override
-  _UAStateManagerState createState() => _UAStateManagerState();
+  UAStateManagerState createState() => UAStateManagerState();
 }
 
-class _UAStateManagerState extends State<UAStateManager> {
+class UAStateManagerState extends State<UAStateManager> {
   late Future<List<Accomplishment>> database;
 
   @override
@@ -39,9 +39,9 @@ class _UAStateManagerState extends State<UAStateManager> {
   @override
   Widget build(BuildContext context) {
     return UAState(
-      child: widget.child,
       database: database,
       onDatabaseChange: onDatabaseChange,
+      child: widget.child,
     );
   }
 }

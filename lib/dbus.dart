@@ -7,7 +7,7 @@ import 'models/accomplishment.dart';
 final dbusClient = DBusClient.session();
 const interface = 'org.ubuntu.Accomplishments';
 final path = DBusObjectPath('/org/ubuntu/Accomplishments');
-late final object = DBusRemoteObject(dbusClient, name: interface, path: path);
+final object = DBusRemoteObject(dbusClient, name: interface, path: path);
 
 Future<List<String>> fetchTrophies() async {
   final response = await object.callMethod(interface, 'list_trophies', [],
