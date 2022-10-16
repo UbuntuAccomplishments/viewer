@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Ubuntu Accomplishments
+GenericName=Ubuntu Accomplishments
+Comment=Ubuntu Accomplishments Viewer
+Categories=Utility;
+Exec=ubuntu-accomplishments
+Icon=ubuntu-accomplishments
+Terminal=false
+Type=Application

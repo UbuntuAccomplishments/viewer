@@ -1,5 +1,5 @@
-name: ubuntuaccomplishments
-description: Ubuntu Accomplishments client
+name: accomplishments_viewer
+description: Ubuntu Accomplishments viewer
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -35,7 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.5
   dbus: ^0.7.8
-  flutter_html: ^3.0.0-alpha.5
+  flutter_html: ^3.0.0-alpha.6
   path: ^1.8.2
   url_launcher: ^6.1.5
   flutter_svg: ^1.1.4
@@ -71,7 +71,7 @@ flutter:
   assets:
     - data/media/lock.svg
     - data/media/trophyinfo.svg
-    - data/media/ubuntu-accomplishments-system.svg
+    - data/media/ubuntu-accomplishments.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
