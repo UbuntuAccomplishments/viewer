@@ -17,16 +17,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UAStateManager(
-      child: MaterialApp(
-        title: getAppTitle(),
-        theme: yaruLight,
-        darkTheme: yaruDark,
-        home: MyHomePage(title: getAppTitle()),
-        routes: <String, WidgetBuilder>{
-          '/settings': (BuildContext context) =>
-              SettingsPage(title: getSettingsTitle()),
-        },
-      ),
+      child: YaruTheme(builder: (context, yaru, child) {
+        return MaterialApp(
+          title: getAppTitle(),
+          theme: yaru.theme,
+          darkTheme: yaru.darkTheme,
+          home: MyHomePage(title: getAppTitle()),
+          routes: <String, WidgetBuilder>{
+            '/settings': (BuildContext context) =>
+                SettingsPage(title: getSettingsTitle()),
+          },
+        );
+      }),
     );
   }
 }
